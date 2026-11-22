@@ -51,14 +51,6 @@ function ScrollToTop() {
   return null
 }
 
-function BootSplash() {
-  return (
-    <div className="grid min-h-screen place-items-center">
-      <span className="size-12 animate-spin rounded-full border-[3px] border-[var(--line)] border-t-brand-600" />
-    </div>
-  )
-}
-
 function Gate() {
   const { user, ready } = useAuth()
   const progress = useProgress()
@@ -85,17 +77,13 @@ function Gate() {
     }, 2600)
     return () => window.clearTimeout(t)
   }, [ready, user, showToast])
-  if (!user) {
-    if (!ready) return <BootSplash />
-    return <AccountGate />
-  }
   return (
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<HomePage />} />
         <Route path="book" element={<BookPage />} />
         <Route path="account" element={<AccountPage />} />
-        <Route path="admin" element={<AdminPage />} />
+        <Route path="admin" element={user ? <AdminPage /> : <AccountGate />} />
         <Route path="unit/:unitId" element={<UnitPage />} />
         <Route path="unit/:unitId/quiz" element={<UnitQuizPage />} />
         <Route path="unit/:unitId/writing" element={<WritingPage />} />

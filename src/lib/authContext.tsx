@@ -1,9 +1,21 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
-import { currentUser, login as authLogin, signOut as authLogout, register as authRegister } from './auth'
+import { currentUser, login as authLogin, signOut as authLogout, register as authRegister, storageKey } from './auth'
 import type { AuthResult } from './auth'
 import { getSupabase, initSupabase, currentUsername } from './supabase'
-import { pullAll } from './sync'
+import { pullAll, queueSync } from './sync'
+import { carryGuestData } from './guestMigration'
+
+const STORAGE_PREFIX = 'speakout-b1'
+
+/** Move anything a guest saved in this browser into the account they just used. */
+function carryGuestDataToAccount() {
+  carryGuestData(window.localStorage, {
+    prefix: STORAGE_PREFIX,
+    toUserKey: (key) => storageKey(key),
+    onMigrated: (key) => queueSync(key),
+  })
+}
 
 interface AuthContextValue {
   user: string | null
@@ -50,13 +62,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = useCallback(async (username: string, password: string) => {
     const result = await authLogin(username, password)
-    if (result.ok) setUser(currentUser())
+    if (result.ok) {
+      carryGuestDataToAccount()
+      setUser(currentUser())
+    }
     return result
   }, [])
 
   const register = useCallback(async (username: string, password: string, age?: number) => {
     const result = await authRegister(username, password, age)
-    if (result.ok) setUser(currentUser())
+    if (result.ok) {
+      carryGuestDataToAccount()
+      setUser(currentUser())
+    }
     return result
   }, [])
 
