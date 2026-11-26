@@ -10,6 +10,7 @@ import Reveal from '../components/Reveal'
 import AnimatedBar from '../components/AnimatedBar'
 import LineMap from '../components/LineMap'
 import PartsBanner from '../components/PartsBanner'
+import PartIdentity from '../components/PartIdentity'
 import { IconBook, IconCheck, IconFlame, IconLayers, IconMic, IconShare } from '../components/Icons'
 
 export default function HomePage() {
@@ -64,6 +65,7 @@ export default function HomePage() {
 
   return (
     <div className="fade-up space-y-16">
+      <PartIdentity current={2} />
       {/* ---- 1. Title page ---- */}
       <section className="title-page mx-auto max-w-2xl pt-6">
         <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-[var(--ink-faint)]">
