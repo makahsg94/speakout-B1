@@ -30,7 +30,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          VITE_BASE: /the-book-2/
+          VITE_BASE: /speakout-B1/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

@@ -9,6 +9,7 @@ import Reveal from '../components/Reveal'
 import AnimatedBar from '../components/AnimatedBar'
 import Parallax from '../components/Parallax'
 import { IconChevronRight, IconVideo, IconHome, IconCheck, IconList, IconTarget, IconVolume, IconSpark, IconPen } from '../components/Icons'
+import PartsBanner from '../components/PartsBanner'
 
 function LessonPreview({ lesson }: { lesson: { title: string; pages: [number, number]; labels?: { grammar?: string; vocabulary?: string; pronunciation?: string; skills?: string }; objectives?: string[]; blocks: { type: string; title?: string; exercise?: { title?: string }; videos?: unknown[]; tracks?: unknown[] }[] } }) {
   const exercises = lesson.blocks.filter((b) => b.type === 'exercise').length
@@ -105,6 +106,8 @@ export default function UnitPage() {
         <IconChevronRight size={13} />
         <span className="text-[var(--ink)]">{label}</span>
       </nav>
+
+      <PartsBanner current={2} />
 
       <header className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_220px]">
         <div>

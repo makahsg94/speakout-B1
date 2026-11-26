@@ -60,7 +60,7 @@ export default function Layout() {
 
       <footer className="mx-auto max-w-4xl px-4 pb-8 pt-4 text-center text-xs text-[var(--ink-faint)]">
         <p>
-          Speakout 3rd Edition A2 {'\u00b7'} course companion {'\u2013'} for studying with your class
+          Speakout 3rd Edition B1 {'\u00b7'} course companion {'\u2013'} for studying with your class
         </p>
         <div className="mt-3 space-y-0.5" dir="rtl" lang="ar">
           <p className="text-[12px]">

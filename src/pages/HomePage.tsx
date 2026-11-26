@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { BOOK, flattenLessons, unitGlyph, unitLabel } from '../content/book'
-import { BOOK_1_URL } from '../config/sites'
 import { useProgress } from '../lib/appContext'
 import { useAuth } from '../lib/authContext'
 import { levelProgress, achievementsFor } from '../lib/progress'
@@ -10,6 +9,7 @@ import { playSound } from '../lib/sounds'
 import Reveal from '../components/Reveal'
 import AnimatedBar from '../components/AnimatedBar'
 import LineMap from '../components/LineMap'
+import PartsBanner from '../components/PartsBanner'
 import { IconBook, IconCheck, IconFlame, IconLayers, IconMic, IconShare } from '../components/Icons'
 
 export default function HomePage() {
@@ -66,13 +66,6 @@ export default function HomePage() {
     <div className="fade-up space-y-16">
       {/* ---- 1. Title page ---- */}
       <section className="title-page mx-auto max-w-2xl pt-6">
-        <p
-          className="mb-3 inline-block rounded-full border border-brand-300 bg-brand-50 px-3 py-1 text-[12px] font-bold text-brand-700 dark:border-brand-800 dark:bg-brand-950 dark:text-brand-300"
-          dir="rtl"
-          lang="ar"
-        >
-          الجزء التاني
-        </p>
         <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-[var(--ink-faint)]">
           {BOOK.edition} {'\u00b7'} Level {BOOK.level}
         </p>
@@ -227,28 +220,8 @@ export default function HomePage() {
         </Link>
       </section>
 
-      {/* ---- Book 1 link ---- */}
-      <section className="mx-auto max-w-2xl">
-        <a
-          href={BOOK_1_URL}
-          className="group flex items-center gap-4 rounded-2xl border border-brand-200 bg-gradient-to-r from-brand-50 to-warm-50 p-5 shadow-sm transition-all hover:shadow-md dark:border-brand-800 dark:from-brand-950/60 dark:to-warm-950/60"
-        >
-          <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-brand-600 text-xl text-white">
-            <IconBook size={22} />
-          </span>
-          <span className="min-w-0 flex-1">
-            <span className="block text-lg font-bold tracking-tight text-brand-800 dark:text-brand-200" dir="rtl" lang="ar">
-              الجزء الأول · كتاب Speakout A2
-            </span>
-            <span className="block text-[13px] leading-snug text-[var(--ink-soft)]" dir="rtl" lang="ar">
-              محتوى المستوى الأول — دروس، مراجعة، وشادونج بنفس النظام، لو حابب تبدأ من هناك الأول
-            </span>
-          </span>
-          <span className="shrink-0 rounded-full bg-brand-600 px-3 py-1.5 text-xs font-bold text-white transition-transform group-hover:translate-x-0.5">
-            روح للجزء الأول
-          </span>
-        </a>
-      </section>
+      {/* ---- Four parts banner ---- */}
+      <PartsBanner current={2} />
 
       {/* ---- 2. The line: the whole course as one ride ---- */}
       <section>
